@@ -1,0 +1,25 @@
+{
+  "name": "haxe",
+  "version": "3.2.0",
+  "description": "The Cross-platform Toolkit",
+  "main": "index.js",
+  "scripts": {
+    "install": "node ./install.js"
+  },
+  "bin": {
+    "haxe": "./bin/haxe",
+    "haxelib": "./bin/haxelib"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "download": "^4.2.1",
+    "fs-extra": "^0.24.0"
+  },
+  "config": {
+    "haxe_version": "3.2.0",
+    "extracted_directory": "haxe-3.2.0",
+    "std_path": "./current/std",
+    "haxelib_path": "./lib"
+  }
+}

@@ -1,0 +1,6 @@
+current
+lib/*
+!lib/dummy
+node_modules/
+tmp/
+bin/
