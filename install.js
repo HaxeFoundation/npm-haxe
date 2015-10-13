@@ -9,15 +9,13 @@ var CURRENT = './current';
 
 var packageVersion = process.env.npm_package_version;
 
-var archiveConf = {
-	"nightly": false,
-	"haxe_version": "3.2.0",
-    "extracted_directory": "haxe-3.2.0"
+function getConfig(key) {
+	return process.env[ 'npm_package_config_' + key ];
 }
 
-var haxeVersion = archiveConf['haxe_version'];
-var extractedDirectory = archiveConf['extracted_directory'];
-var isNightly = archiveConf['nightly'];
+var majorVersion = getConfig('version');
+var extractedDirectory = 'haxe-' + majorVersion;
+var nightly = getConfig('nightly');
 
 var platform = os.platform();
 var arch = os.arch();
@@ -43,11 +41,11 @@ function clean(cb) {
 
 function download() {
 
-	console.log("Getting Haxe " + haxeVersion);
+	console.log("Getting Haxe " + majorVersion + (nightly ? " (nightly=" + nightly + ")" : "") );
 
-	var url = haxeUrl(platform, arch, haxeVersion, isNightly);
+	var url = haxeUrl(platform, arch);
 
-	console.log("Downloading: " + url );
+	console.log("Downloading " + url );
 
 	Download({ extract: true })
 		.get( url )
@@ -57,13 +55,14 @@ function download() {
 
 function onExtracted( err, files ) {
 	if( err ) {
-		console.error(err);
-		return;
+		console.error("Unable to download or extract Haxe.");
+		throw err;
 	}
 
 	Fs.move( path.join(TMP, extractedDirectory) , CURRENT , function(err){
 		if( err ) {
 			console.error( err );
+			throw err;
 		}
 
 		fs.chmodSync(path.join(CURRENT, 'haxe'), '755');
@@ -73,8 +72,10 @@ function onExtracted( err, files ) {
 
 }
 
-function haxeUrl( platform, arch, version, isNightly ) {
-	
+function haxeUrl( platform, arch ) {
+	var version = majorVersion;
+	var isNightly = !!nightly;
+
 	var url;
 	switch ( isNightly ) {
 		case true: 
@@ -99,7 +100,7 @@ function haxeUrl( platform, arch, version, isNightly ) {
 					url += 'windows';
 					break;
 			}
-			url += '/haxe_latest.tar.gz';
+			url += '/haxe_'+nightly+'.tar.gz';
 			break;
 		default: 
 			url = 'http://haxe.org/website-content/downloads/' + version + '/downloads/haxe-' + version + '-';
@@ -127,6 +128,7 @@ function haxeUrl( platform, arch, version, isNightly ) {
 					break;
 				default: 
 					console.error('Haxe is not compatible with your platform');
+					throw 'error';
 			}
 	}
 	
