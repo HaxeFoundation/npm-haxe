@@ -15,11 +15,5 @@
   "dependencies": {
     "download": "^4.2.1",
     "fs-extra": "^0.24.0"
-  },
-  "config": {
-    "haxe_version": "3.2.0",
-    "extracted_directory": "haxe-3.2.0",
-    "std_path": "./current/std",
-    "haxelib_path": "./lib"
   }
 }

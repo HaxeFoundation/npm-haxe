@@ -9,12 +9,15 @@ var CURRENT = './current';
 
 var packageVersion = process.env.npm_package_version;
 
-function config( key ) {
-	return process.env['npm_package_config_' + key];
+var archiveConf = {
+	"nightly": false,
+	"haxe_version": "3.2.0",
+    "extracted_directory": "haxe-3.2.0"
 }
 
-var haxeVersion = config('haxe_version');
-var extractedDirectory = config('extracted_directory');
+var haxeVersion = archiveConf['haxe_version'];
+var extractedDirectory = archiveConf['extracted_directory'];
+var isNightly = archiveConf['nightly'];
 
 var platform = os.platform();
 var arch = os.arch();
@@ -42,7 +45,7 @@ function download() {
 
 	console.log("Getting Haxe " + haxeVersion);
 
-	var url = haxeUrl(platform, arch, haxeVersion);
+	var url = haxeUrl(platform, arch, haxeVersion, isNightly);
 
 	console.log("Downloading: " + url );
 
@@ -70,11 +73,11 @@ function onExtracted( err, files ) {
 
 }
 
-function haxeUrl( platform, arch, version ) {
+function haxeUrl( platform, arch, version, isNightly ) {
 	
 	var url;
-	switch ( version ) {
-		case 'nightly': 
+	switch ( isNightly ) {
+		case true: 
 			url = 'http://hxbuilds.s3-website-us-east-1.amazonaws.com/builds/haxe/';
 			switch( platform ) {
 				case 'linux':
