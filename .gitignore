@@ -3,3 +3,4 @@ lib/*
 !lib/dummy
 node_modules/
 tmp/
+npm-debug.log
