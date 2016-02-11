@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "install": "node ./install.js",
-    "postinstall": "haxelib newrepo"
+    "postinstall": "./bin/haxelib newrepo"
   },
   "bin": {
     "haxe": "./bin/haxe",
@@ -19,6 +19,7 @@
   },
   "config": {
     "version": "3.2.1",
-    "nightly": ""
+    "nightly": "",
+    "haxelib_version": "3.2.0-rc.1"
   }
 }

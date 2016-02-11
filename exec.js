@@ -1,11 +1,11 @@
 var path = require('path');
 var spawn = require('child_process').spawn;
 
-var args = process.argv.slice(2);
-
-module.exports = function(command) {
+module.exports = function(command, args) {
 	
 	var env = require('./env.js');
+
+	args = (args||[]).concat( process.argv.slice(2) );
 
 	// For Node 0.6 compatibility, pipe the streams manually, instead of using
 	// `{ stdio: 'inherit' }`.
