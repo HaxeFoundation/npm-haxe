@@ -1,10 +1,11 @@
 {
   "name": "haxe",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "The Cross-platform Toolkit",
   "main": "index.js",
   "scripts": {
-    "install": "node ./install.js"
+    "install": "node ./install.js",
+    "postinstall": "haxelib newrepo"
   },
   "bin": {
     "haxe": "./bin/haxe",
