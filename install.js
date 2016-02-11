@@ -3,6 +3,7 @@ var Download = require('download');
 var Fs = require('fs-extra');
 var fs = require('fs');
 var path = require('path');
+var downloadStatus = require('download-status');
 
 var TMP = './tmp';
 var CURRENT = './current';
@@ -75,10 +76,11 @@ function downloadHaxelib( cb ) {
 }
 
 function downloadAndMoveTo( url , extractedDir, targetDir , cb ) {
-	console.log("Downloading " + url);
+	
 	Download({ extract: true })
 		.get( url )
 		.dest( TMP )
+		.use(downloadStatus())
 		.run( function(err,files){
 			if( err ) {
 				console.error("Unable to download or extract " + url);
