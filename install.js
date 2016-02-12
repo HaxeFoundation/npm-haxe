@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 var os = require('os');
 var Download = require('download');
 var Fs = require('fs-extra');
