@@ -8,7 +8,7 @@ var downloadStatus = require('download-status');
 
 var TMP = './tmp';
 var CURRENT = './current';
-var HAXELIB = './haxelib';
+var HAXELIB = './haxelib-client';
 
 var packageVersion = process.env.npm_package_version;
 
