@@ -3,5 +3,5 @@ lib/*
 !lib/dummy
 node_modules/
 tmp/
-haxelib
+haxelib-client
 npm-debug.log
