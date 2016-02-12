@@ -4,8 +4,7 @@
   "description": "The Cross-platform Toolkit",
   "main": "index.js",
   "scripts": {
-    "install": "node ./install.js",
-    "postinstall": "./bin/haxelib newrepo"
+    "install": "node ./install.js"
   },
   "bin": {
     "haxe": "./bin/haxe",
