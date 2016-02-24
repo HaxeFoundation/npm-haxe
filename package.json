@@ -3,7 +3,7 @@
   "version": "0.0.3",
   "description": "The Cross-platform Toolkit",
   "scripts": {
-    "install": "./install.js"
+    "install": "node install.js"
   },
   "directories": {
     "bin": "./bin"
