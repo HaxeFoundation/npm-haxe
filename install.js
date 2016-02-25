@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 var os = require('os');
 var Download = require('download');
-var Fs = require('fs-extra');
+var mv = require('mv');
+var rmrf = require('rimraf');
 var fs = require('fs');
 var path = require('path');
 var downloadStatus = require('download-status');
@@ -24,6 +25,8 @@ var haxelibVersion = getConfig('haxelib_version');
 var platform = os.platform();
 var arch = os.arch();
 
+var isWin = platform.indexOf('win') == 0;
+
 clean( function(err){
 	if( err != null ) {
 		throw err;
@@ -33,7 +36,7 @@ clean( function(err){
 			throw err;
 		}
 
-		fs.chmodSync(path.join(CURRENT, 'haxe'), '755');
+		fs.chmodSync(path.join(CURRENT,'haxe' + (isWin ? '.exe' : '')) , '755');
 		downloadHaxelib( function(err) {
 			if( err != null ) {
 				throw err;
@@ -44,15 +47,15 @@ clean( function(err){
 } );
 
 function clean(cb) {
-	Fs.emptyDir(TMP, function(err){
+	rmrf(TMP, function(err){
 		if( err != null ){
 			cb( err );
 		} else {
-			Fs.remove(CURRENT,function(err){
+			rmrf(CURRENT,function(err){
 				if( err != null ) {
 					cb( err );
 				} else {
-					Fs.remove(HAXELIB, cb);
+					rmrf(HAXELIB, cb);
 				}
 			} );
 			
@@ -88,7 +91,7 @@ function downloadAndMoveTo( url , extractedDir, targetDir , cb ) {
 				cb(err);
 			}
 
-			Fs.move( path.join(TMP, extractedDir) , targetDir , function(err){
+			mv( path.join(TMP, extractedDir) , targetDir , {mkdirp: true} , function(err){
 				if( err ) {
 					console.error( err );
 					cb(err);
