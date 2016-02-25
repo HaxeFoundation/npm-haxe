@@ -150,7 +150,7 @@ function haxeUrl( platform, arch ) {
 					break;
 				case 'win32':
 				case 'win64':
-					url += 'win32';
+					url += 'win';
 					url += '.zip';
 					break;
 				default: 
