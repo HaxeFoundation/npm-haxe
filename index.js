@@ -1,6 +1,6 @@
 
-var executable = require('./executable');
-var vars = require('./vars');
+var executable = require('./lib/executable');
+var vars = require('./lib/vars');
 
 module.exports = {
     haxe: executable( vars.haxe.path, vars.haxe.args ),

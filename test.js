@@ -1,5 +1,5 @@
 var assert = require('assert');
-var packageConfig = require('./package-config');
+var packageConfig = require('./lib/package-config');
 
 var haxe = require('.').haxe;
 var haxelib = require('.').haxelib;

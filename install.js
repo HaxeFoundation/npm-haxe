@@ -6,10 +6,10 @@ var rmrf = require('rimraf');
 var fs = require('fs');
 var path = require('path');
 var downloadStatus = require('download-status');
-var packageConfig = require('./package-config');
-var haxeUrl = require('./haxe-url');
+var packageConfig = require('./lib/package-config');
+var haxeUrl = require('./lib/haxe-url');
 
-var vars = require('./vars');
+var vars = require('./lib/vars');
 
 var tmpDir = 'tmp';
 var haxeDir = path.dirname( vars.haxe.path );
