@@ -1,16 +1,16 @@
 {
   "name": "haxe",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "The Cross-platform Toolkit",
   "scripts": {
     "install": "node install.js",
-    "test": "haxe -version && haxelib"
+    "test": "node test.js"
   },
   "directories": {
     "bin": "./bin"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "clemos",
+  "license": "(MIT OR GPL-3.0)",
   "dependencies": {
     "download": "^4.2.1",
     "download-status": "^2.2.1",

@@ -1,4 +1,2 @@
 #!/usr/bin/env node
-var path = require('path');
-
-require('../exec.js')( path.join(__dirname,'../current/haxe') , [] );
+require('..').haxe.cli();

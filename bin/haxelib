@@ -1,5 +1,2 @@
 #!/usr/bin/env node
-var path = require('path');
-var args = ['-cp', path.join(__dirname, '../haxelib-client/src'), '--run', 'tools.haxelib.Main'];
-
-require('../exec.js')( path.join(__dirname,'../current/haxe') , args );
+require('..').haxelib.cli();
