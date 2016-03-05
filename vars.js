@@ -13,7 +13,7 @@ var vars = module.exports = {
         dir: path('haxelib-client')
     },
     env : {
-        HAXELIB_PATH : path('lib'),
+        HAXELIB_PATH : path('.haxelib'),
         HAXE_STD_PATH : path('current/std')
     }
 }

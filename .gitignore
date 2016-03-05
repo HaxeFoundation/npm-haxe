@@ -1,6 +1,6 @@
 current
-lib/*
-!lib/dummy
+.haxelib/*
+!.haxelib/.exist
 node_modules/
 tmp/
 haxelib-client
