@@ -37,6 +37,26 @@ This will also make the haxelib repo global.
 }
 ```
 
+### Running Haxe from NodeJS
+
+This package also comes with the minimal bindings to run the Haxe compiler from NodeJS.
+
+
+```js
+var haxe = require('haxe').haxe;
+var haxelib = require('haxe').haxelib;
+
+// all commands return a ChildProcess instance
+
+haxe( "-version" );
+haxelib( "install", "hxnodejs" );
+
+var server = haxe("--wait", "6000");
+```
+
+See also [test.js](https://github.com/clemos/npm-haxe/blob/master/test.js)
+
+
 ### Configuration options [Experimental]
 
 These are not very well tested, as I'm not even sure how they are supposed to work...
