@@ -28,7 +28,7 @@ This will also make the haxelib repo global.
 ```json
 {
   "scripts":{
-    "postinstall": "haxelib install build.hxml",
+    "postinstall": "haxelib --always install build.hxml",
     "build": "haxe build.hxml"
   },
   "dependencies": {
@@ -36,6 +36,8 @@ This will also make the haxelib repo global.
   }
 }
 ```
+
+Please notice the `--always` flag in the `haxelib` command, to avoid having to confirm haxelibs installation.
 
 ### Running Haxe from NodeJS
 
