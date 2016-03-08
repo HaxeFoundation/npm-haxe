@@ -1,8 +1,8 @@
 var assert = require('assert');
 var packageConfig = require('./lib/package-config');
 
-var haxe = require('.').haxe;
-var haxelib = require('.').haxelib;
+var haxe = require('./index').haxe;
+var haxelib = require('./index').haxelib;
 
 function readAll( ps, cb ) {
     var out = [], err = [];
