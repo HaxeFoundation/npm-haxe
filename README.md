@@ -87,3 +87,18 @@ In this case, the `version` value is still used, and must match the one of the d
 #### Haxelib
 
 `haxelib_version` must match a release from the [official Haxelib repo](https://github.com/HaxeFoundation/haxelib/releases)
+
+### Known issues
+
+The package relies on the `node` command, which [has issues on some Ubuntu versions] (http://stackoverflow.com/questions/21168141/cannot-install-packages-using-node-package-manager-in-ubuntu).
+
+If you get an error similar to this :
+```
+sh: 1: node: not found
+npm WARN This failure might be due to the use of legacy binary "node"
+npm WARN For further explanations, please read /usr/share/doc/nodejs/README.Debian
+```
+Just install the `nodejs-legacy` package:
+```bash
+sudo apt-get install nodejs-legacy
+```
