@@ -1,10 +1,14 @@
 {
   "name": "haxe",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "The Cross-platform Toolkit",
   "scripts": {
     "install": "node install.js",
     "test": "node test.js"
+  },
+  "repository" : { 
+    "type" : "git", 
+    "url" : "https://github.com/clemos/npm-haxe.git"
   },
   "directories": {
     "bin": "./bin"
