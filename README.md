@@ -6,7 +6,7 @@ Installs [Haxe](http://haxe.org) using [Node Package Manager](https://www.npmjs.
 ## Key-features
 
 * Global or per-project, sandboxed, standard Haxe installation
-* No dependency to Neko/libneko
+* No dependency to Neko/libneko (except for `haxelib run ...`)
 * Includes [Haxelib](http://lib.haxe.org/)
 * Tested on Ubuntu/Linux and Windows
 
@@ -15,7 +15,7 @@ Installs [Haxe](http://haxe.org) using [Node Package Manager](https://www.npmjs.
 ### CLI installation
 
 ```bash
-npm install clemos/npm-haxe
+npm install haxe@next
 ```
 
 By default, this will make `haxe` and `haxelib` available to [npm scripts](https://docs.npmjs.com/misc/scripts) only,
@@ -33,7 +33,7 @@ This will also make the haxelib repo global.
     "build": "haxe build.hxml"
   },
   "dependencies": {
-    "haxe": "clemos/npm-haxe"
+    "haxe": "next"
   }
 }
 ```
