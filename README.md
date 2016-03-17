@@ -1,5 +1,5 @@
 # npm-haxe 
-[![Build Status](https://travis-ci.org/clemos/npm-haxe.svg?branch=master)](https://travis-ci.org/clemos/npm-haxe)
+[![Build Status](https://travis-ci.org/HaxeFoundation/npm-haxe.svg?branch=master)](https://travis-ci.org/HaxeFoundation/npm-haxe)
 
 Installs [Haxe](http://haxe.org) using [Node Package Manager](https://www.npmjs.com/) aka `npm` 
 
@@ -57,7 +57,7 @@ haxelib( "install", "hxnodejs" );
 var server = haxe("--wait", "6000");
 ```
 
-See also [test.js](https://github.com/clemos/npm-haxe/blob/master/test.js)
+See also [test.js](https://github.com/HaxeFoundation/npm-haxe/blob/master/test.js)
 
 
 ### Configuration options
