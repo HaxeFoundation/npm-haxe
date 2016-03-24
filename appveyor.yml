@@ -1,0 +1,16 @@
+version: "{build}"
+
+environment:
+  global:
+    nodejs_version: "LTS"
+
+install:
+  - ps: Install-Product node $env:nodejs_version
+  - node --version
+  - npm --version
+  - npm install
+
+build: off
+
+test_script:
+  - npm test
