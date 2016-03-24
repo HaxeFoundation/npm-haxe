@@ -1,5 +1,6 @@
 # npm-haxe 
-[![Build Status](https://travis-ci.org/HaxeFoundation/npm-haxe.svg?branch=master)](https://travis-ci.org/HaxeFoundation/npm-haxe)
+[![TravisCI Build Status](https://travis-ci.org/HaxeFoundation/npm-haxe.svg?branch=master)](https://travis-ci.org/HaxeFoundation/npm-haxe)
+[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/HaxeFoundation/npm-haxe?branch=master&svg=true)](https://ci.appveyor.com/project/HaxeFoundation/npm-haxe)
 
 Installs [Haxe](http://haxe.org) using [Node Package Manager](https://www.npmjs.com/) aka `npm` 
 
