@@ -1,7 +1,14 @@
 {
   "name": "haxe",
   "version": "4.0.0",
-  "description": "The Cross-platform Toolkit",
+  "homepage": "http://haxe.org/",
+  "description": "Wrapper of Haxe, an open source toolkit based on a modern, high level, strictly typed programming language, a cross-compiler, a complete cross-platform standard library and ways to access each platform's native capabilities.",
+  "keywords": [
+    "compiler",
+    "language",
+    "haxe",
+    "wrapper"
+  ],
   "scripts": {
     "install": "node install.js",
     "test": "node test.js"
@@ -10,11 +17,16 @@
     "type" : "git", 
     "url" : "https://github.com/HaxeFoundation/npm-haxe.git"
   },
+  "bugs": {
+      "url": "https://github.com/HaxeFoundation/npm-haxe/issues"
+  },
   "directories": {
     "bin": "./bin"
   },
   "author": "clemos",
-  "license": "(MIT OR GPL-3.0)",
+  "license": "MIT",
+  "os" : [ "win32", "win64", "darwin", "linux" ],
+  "cpu" : [ "x64", "ia32" ],
   "dependencies": {
     "download": "^4.2.1",
     "download-status": "^2.2.1",
