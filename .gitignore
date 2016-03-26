@@ -1,7 +1,5 @@
-current
+downloads
 .haxelib/*
 !.haxelib/.exist
 node_modules/
-tmp/
-haxelib-client
 npm-debug.log

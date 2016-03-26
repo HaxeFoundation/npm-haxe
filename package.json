@@ -13,24 +13,31 @@
     "install": "node install.js",
     "test": "node test.js"
   },
-  "repository" : { 
-    "type" : "git", 
-    "url" : "https://github.com/HaxeFoundation/npm-haxe.git"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/HaxeFoundation/npm-haxe.git"
   },
   "bugs": {
-      "url": "https://github.com/HaxeFoundation/npm-haxe/issues"
+    "url": "https://github.com/HaxeFoundation/npm-haxe/issues"
   },
   "directories": {
     "bin": "./bin"
   },
   "author": "clemos",
   "license": "MIT",
-  "os" : [ "win32", "win64", "darwin", "linux" ],
-  "cpu" : [ "x64", "ia32" ],
+  "os": [
+    "win32",
+    "win64",
+    "darwin",
+    "linux"
+  ],
+  "cpu": [
+    "x64",
+    "ia32"
+  ],
   "dependencies": {
     "download": "^4.2.1",
     "download-status": "^2.2.1",
-    "mv": "^2.1.1",
     "rimraf": "^2.5.2"
   },
   "config": {

@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 var os = require('os');
 var Download = require('download');
-var mv = require('mv');
 var rmrf = require('rimraf');
 var fs = require('fs');
 var path = require('path');
@@ -11,19 +10,53 @@ var haxeUrl = require('./lib/haxe-url');
 
 var vars = require('./lib/vars');
 
-var tmpDir = 'tmp';
-var haxeDir = path.dirname( vars.haxe.path );
+var haxeDir = vars.haxe.dir;
 var haxelibDir = vars.haxelib.dir;
 
-var majorVersion = packageConfig('version');
+var haxeVersion = packageConfig('version');
 var nightly = packageConfig('nightly');
 var haxelibVersion = packageConfig('haxelib_version');
-var haxeExtractedDirectory = 'haxe-' + majorVersion;
 
 var platform = os.platform();
 var arch = os.arch();
 
 var isWin = platform.indexOf('win') == 0;
+
+function clean(cb) {
+	rmrf(haxeDir,function(err){
+		if( err != null ) {
+			cb( err );
+		} else {
+			rmrf(haxelibDir, cb);
+		}
+	} );
+}
+
+function downloadHaxe( cb ) {
+	console.log("Getting Haxe " + haxeVersion + (nightly ? " (nightly=" + nightly + ")" : "") );
+	var url = haxeUrl(platform, arch, haxeVersion, nightly);
+	downloadAndMoveTo( url , haxeDir, cb );
+}
+
+function downloadHaxelib( cb ) {
+	console.log("Getting Haxelib " + haxelibVersion );
+	var url = "https://github.com/HaxeFoundation/haxelib/archive/" + haxelibVersion + ".tar.gz";
+	downloadAndMoveTo( url , haxelibDir, cb );
+}
+
+function downloadAndMoveTo( url, targetDir, cb ) {
+	Download({ extract: true, strip: 1 })
+		.get( url )
+		.dest( targetDir )
+		.use(downloadStatus())
+		.run( function(err,files){
+			if( err ) {
+				console.error("Unable to download or extract " + url);
+				cb(err);
+			}
+			cb();
+		});
+}
 
 clean( function(err){
 	if( err != null ) {
@@ -34,68 +67,11 @@ clean( function(err){
 			throw err;
 		}
 
-		fs.chmodSync(path.join( haxeDir,'haxe' + (isWin ? '.exe' : '')) , '755');
+		fs.chmodSync(path.join( haxeDir, 'haxe' + (isWin ? '.exe' : '')) , '755');
 		downloadHaxelib( function(err) {
 			if( err != null ) {
 				throw err;
 			}
 		});
-
 	});
 } );
-
-function clean(cb) {
-	rmrf(tmpDir, function(err){
-		if( err != null ){
-			cb( err );
-		} else {
-			rmrf(haxeDir,function(err){
-				if( err != null ) {
-					cb( err );
-				} else {
-					rmrf(haxelibDir, cb);
-				}
-			} );
-			
-		}
-	});
-	
-}
-
-function downloadHaxe( cb ) {
-
-	console.log("Getting Haxe " + majorVersion + (nightly ? " (nightly=" + nightly + ")" : "") );
-	var url = haxeUrl(platform, arch, majorVersion, nightly);
-	downloadAndMoveTo( url , haxeExtractedDirectory, haxeDir, cb );
-}
-
-function downloadHaxelib( cb ) {
-
-	console.log("Getting Haxelib " + haxelibVersion );
-	var url = "https://github.com/HaxeFoundation/haxelib/archive/" + haxelibVersion + ".tar.gz";
-	downloadAndMoveTo( url , "haxelib-" + haxelibVersion, haxelibDir, cb );
-
-}
-
-function downloadAndMoveTo( url , extractedDir, targetDir , cb ) {
-	
-	Download({ extract: true })
-		.get( url )
-		.dest( tmpDir )
-		.use(downloadStatus())
-		.run( function(err,files){
-			if( err ) {
-				console.error("Unable to download or extract " + url);
-				cb(err);
-			}
-
-			mv( path.join(tmpDir, extractedDir) , targetDir , {mkdirp: true} , function(err){
-				if( err ) {
-					console.error( err );
-					cb(err);
-				}
-
-				cb();
-			});
-		});
-}
