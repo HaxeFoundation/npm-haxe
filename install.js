@@ -18,7 +18,7 @@ var haxelibDir = vars.haxelib.dir;
 var majorVersion = packageConfig('version');
 var nightly = packageConfig('nightly');
 var haxelibVersion = packageConfig('haxelib_version');
-var haxeExtractedDirectory = 'haxe-' + majorVersion;
+var haxeExtractedDirectory = packageConfig('haxe_extracted_directory') || 'haxe-' + majorVersion;
 
 var platform = os.platform();
 var arch = os.arch();
