@@ -25,6 +25,6 @@
     "version": "3.3.0-rc.1",
     "haxe_extracted_directory": "haxe-3.3.0-rc2",
     "nightly": "",
-    "haxelib_version": "3.2.0-rc.1"
+    "haxelib_version": "3.3.0"
   }
 }
