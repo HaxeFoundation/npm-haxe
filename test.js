@@ -22,18 +22,9 @@ function readAll( ps, cb ) {
 
 readAll( haxe('-version') , function(err,out,code){
     assert.equal( 
-        err.toString().trim(), 
+        err.toString().split(" ").shift().trim(), 
         packageConfig("version"),
         "`haxe -version` should match package config version"
-    );
-    assert.equal(code,0);
-});
-
-readAll( haxelib('version') , function(err,out,code){
-    assert.equal( 
-        out.toString().trim(), 
-        packageConfig("haxelib_version"),
-        "`haxelib version` should match package config version"
     );
     assert.equal(code,0);
 });
