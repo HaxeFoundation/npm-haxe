@@ -7,6 +7,7 @@ var path = require('path');
 var downloadStatus = require('download-status');
 var packageConfig = require('./lib/package-config');
 var haxeUrl = require('./lib/haxe-url');
+var parent = require('parent-package-json');
 
 var vars = require('./lib/vars');
 
@@ -14,8 +15,25 @@ var haxeDir = vars.haxe.dir;
 var haxelibDir = vars.haxelib.dir;
 
 var haxeVersion = packageConfig('version');
+try {
+	haxeVersion = parent().parse().config.haxe;
+} catch (error){
+	console.warn('using default version');
+}
+if(haxeVersion == undefined){
+	haxeVersion = packageConfig('version');
+}
+
 var nightly = packageConfig('nightly');
 var haxelibVersion = packageConfig('haxelib_version');
+try {
+	haxelibVersion = parent().parse().config.haxelib;
+} catch (error){
+	console.warn('using default haxelib version');
+}
+if(haxelibVersion == undefined){
+	haxelibVersion = packageConfig('haxelib_version');
+}
 
 var platform = os.platform();
 var arch = os.arch();
