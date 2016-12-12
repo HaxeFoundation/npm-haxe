@@ -17,7 +17,7 @@ Installs [Haxe](http://haxe.org) using [Node Package Manager](https://www.npmjs.
 ### CLI installation
 
 ```bash
-npm install haxe@next
+npm install haxe
 ```
 
 By default, this will make `haxe` and `haxelib` available to [npm scripts](https://docs.npmjs.com/misc/scripts) only,
@@ -35,7 +35,7 @@ This will also make the haxelib repo global.
     "build": "haxe build.hxml"
   },
   "dependencies": {
-    "haxe": "next"
+    "haxe": "4.0.2"
   }
 }
 ```
@@ -70,9 +70,8 @@ Please note they must be set before installing the package.
 
 ```json
 "config": {
-    "haxe:version": "3.2.1",
-    "haxe:nightly": "",
-    "haxe:haxelib_version": "3.2.0-rc.1"
+    "version": "3.2.1",
+    "haxelib_version": "3.2.0-rc.1"
 }
 ```
 
