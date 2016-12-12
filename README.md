@@ -70,7 +70,7 @@ Please note they must be set before installing the package.
 
 ```json
 "config": {
-    "version": "3.2.1",
+    "haxe": "3.2.1",
     "haxelib_version": "3.2.0-rc.1"
 }
 ```
