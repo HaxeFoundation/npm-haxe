@@ -7,16 +7,64 @@ var path = require('path');
 var downloadStatus = require('download-status');
 var packageConfig = require('./lib/package-config');
 var haxeUrl = require('./lib/haxe-url');
-var parent = require('parent-package-json');
-
 var vars = require('./lib/vars');
+
+
+
+function findPackageJson() {
+	var startPath = process.cwd();
+	var ignore = 0;
+
+	var searchPath = path.join(startPath + '/..');
+	var fileFound = false;
+	var nextPath = '';
+	var numSearch = 0;
+
+	while (!fileFound) {
+		searchPath = nextPath || searchPath;
+		numSearch++;
+		if(numSearch>4){
+			return false;
+		}
+		try {
+			fs.statSync(path.join(searchPath + '/package.json'));
+			if (ignore > 0) {
+				ignore--;
+			} else {
+				fileFound = true;
+			}
+		} catch (err) {}
+
+		nextPath = path.join(searchPath + '/..');
+		if (nextPath === path.normalize('/') || nextPath === '.' || nextPath === '..') {
+			break;
+		}
+	}
+
+	if (fileFound) {
+		return {
+			read: function () {
+				return fs.readFileSync(path.join(searchPath + '/package.json'), 'utf8');
+			},
+			parse: function () {
+				return JSON.parse(fs.readFileSync(path.join(searchPath + '/package.json'), 'utf8'));
+			},
+			path: path.join(searchPath + '/package.json')
+		};
+	}
+
+	return false;
+};
 
 var haxeDir = vars.haxe.dir;
 var haxelibDir = vars.haxelib.dir;
 
 var haxeVersion = packageConfig('version');
 try {
-	haxeVersion = parent().parse().config.haxe;
+	var pack = findPackageJson();
+	if(pack != false) {
+		haxeVersion = pack.parse().config.haxe;
+	}
 } catch (error){
 	console.warn('using default version');
 }

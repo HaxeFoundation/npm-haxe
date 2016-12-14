@@ -1,6 +1,6 @@
 {
   "name": "haxe",
-  "version": "4.0.2",
+  "version": "4.1.0",
   "homepage": "http://haxe.org/",
   "description": "Wrapper of Haxe, an open source toolkit based on a modern, high level, strictly typed programming language, a cross-compiler, a complete cross-platform standard library and ways to access each platform's native capabilities.",
   "keywords": [
@@ -38,7 +38,6 @@
   "dependencies": {
     "download": "^4.2.1",
     "download-status": "^2.2.1",
-    "parent-package-json":"^2.0.0",
     "rimraf": "^2.5.2"
   },
   "config": {
