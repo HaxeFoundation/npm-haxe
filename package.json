@@ -22,8 +22,8 @@
     "rimraf": "^2.5.2"
   },
   "config": {
-    "version": "3.3.0-rc.1",
-    "haxe_extracted_directory": "haxe-3.3.0-rc2",
+    "version": "3.4.0-rc.2",
+    "haxe_extracted_directory": "haxe-3.4.0-rc2",
     "nightly": ""
   }
 }
