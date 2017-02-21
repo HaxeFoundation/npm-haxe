@@ -20,7 +20,7 @@ function readAll( ps, cb ) {
     });
 }
 
-readAll( haxe('-version') , function(err,out,code){
+readAll( haxe.spawn('-version') , function(err,out,code){
     assert.equal( 
         err.toString().split(" ").shift().trim(), 
         packageConfig("version"),
@@ -29,6 +29,16 @@ readAll( haxe('-version') , function(err,out,code){
     assert.equal(code,0);
 });
 
-readAll( haxelib('list') , function(err,out,code){
+// same as above in "execFile" mode
+haxe.exec('-version', function(err,stdout,stderr){
+    assert.equal( 
+        stderr.toString().split(" ").shift().trim(), 
+        packageConfig("version"),
+        "`haxe -version` should match package config version"
+    );
+});
+
+readAll( haxelib.spawn('list') , function(err,out,code){
     assert.equal(code,0,"list packages");
 });
+

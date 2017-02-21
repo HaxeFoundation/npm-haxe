@@ -4,7 +4,7 @@
   "description": "The Cross-platform Toolkit",
   "scripts": {
     "install": "node install.js",
-    "test": "node test.js"
+    "test": "node test.js && haxelib install --always hxnodejs && haxe test.hxml"
   },
   "repository" : { 
     "type" : "git", 

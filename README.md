@@ -49,12 +49,13 @@ This package also comes with the minimal bindings to run the Haxe compiler from 
 var haxe = require('haxe').haxe;
 var haxelib = require('haxe').haxelib;
 
-// all commands return a ChildProcess instance
+// all `spawn` calls return a ChildProcess instance
 
-haxe( "-version" );
-haxelib( "install", "hxnodejs" );
+haxe.spawn( "-version" );
+haxelib.spawn( "install", "hxnodejs" );
 
-var server = haxe("--wait", "6000");
+var server = haxe.spawn("--wait", "6000");
+
 ```
 
 See also [test.js](https://github.com/HaxeFoundation/npm-haxe/blob/master/test.js)
@@ -85,10 +86,6 @@ Please notice the directory name in the archive must match.
 for current latest [nightly build](http://hxbuilds.s3-website-us-east-1.amazonaws.com/builds/haxe/index.html).
 
 In this case, the `haxe:version` value is still used, and must match the one of the directory extracted from the archive.
-
-#### Haxelib
-
-`haxe:haxelib_version` must match a release from the [official Haxelib repo](https://github.com/HaxeFoundation/haxelib/releases)
 
 ### Known issues
 

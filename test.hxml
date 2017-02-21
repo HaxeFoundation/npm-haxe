@@ -1,0 +1,6 @@
+-D internaltest
+-main Test.hx
+-lib hxnodejs
+-cp hx
+-js tmp/test.js
+-cmd node tmp/test.js
