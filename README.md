@@ -1,5 +1,5 @@
 # npm-haxe 
-[![Build Status](https://travis-ci.org/HaxeFoundation/npm-haxe.svg?branch=master)](https://travis-ci.org/HaxeFoundation/npm-haxe)
+[![Build Status](https://travis-ci.org/clemos/npm-haxe.svg?branch=master)](https://travis-ci.org/clemos/npm-haxe)
 
 Installs [Haxe](http://haxe.org) using [Node Package Manager](https://www.npmjs.com/) aka `npm` 
 
@@ -56,9 +56,21 @@ haxelib.spawn( "install", "hxnodejs" );
 
 var server = haxe.spawn("--wait", "6000");
 
+// or using `exec`
+
+haxe.exec( ["-version"], function(err, stdout, stderr) {
+    console.log('current version is', stderr);
+} );
+
 ```
 
-See also [test.js](https://github.com/HaxeFoundation/npm-haxe/blob/master/test.js)
+See also [test.js](https://github.com/clemos/npm-haxe/blob/master/test.js)
+
+### Haxe externs
+
+This package also contains Haxe externs of itself, an can be installed via `haxelib git`.
+
+Maybe a bit too meta, though...
 
 
 ### Configuration options
