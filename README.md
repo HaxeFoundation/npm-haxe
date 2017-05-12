@@ -99,14 +99,15 @@ for current latest [nightly build](http://hxbuilds.s3-website-us-east-1.amazonaw
 
 In this case, the `haxe:version` value is still used, and must match the one of the directory extracted from the archive.
 
-#### Haxelib, Neko and `haxelib_bin`
+#### Haxelib, Neko and `HAXELIB_ENABLE_NEKO`
 
 By default, Haxelib commands are run through the Haxe interpreter. While this makes the package 
 work without [Neko](http://nekovm.org), it will hang on most `haxelib run ...` commands.
 
-In order to use Haxelib `run` commands, you need to install Neko on your own, and then use : 
+In order to use Haxelib `run` commands, you need to install Neko on your own, 
+and then use the `HAXELIB_ENABLE_NEKO` environment variable : 
 ```
-haxelib_bin run ...
+HAXELIB_ENABLE_NEKO=1 haxelib run ...
 ```
 This will run the standard `haxelib` neko binary.
 

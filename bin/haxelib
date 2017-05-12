@@ -1,2 +1,7 @@
 #!/usr/bin/env node
-require('..').haxelib.cli();
+if( process.env.HAXELIB_ENABLE_NEKO == "1" ){
+  require('..').haxelib_bin.cli();  
+} else {
+  require('..').haxelib.cli();
+}
+
