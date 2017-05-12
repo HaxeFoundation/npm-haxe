@@ -6,7 +6,7 @@ Installs [Haxe](http://haxe.org) using [Node Package Manager](https://www.npmjs.
 ## Key-features
 
 * Global or per-project, sandboxed, standard Haxe installation
-* No dependency to Neko/libneko (except for `haxelib run ...`)
+* Optional dependency to Neko/libneko (required for `haxelib run ...`, see below)
 * Includes [Haxelib](http://lib.haxe.org/)
 * Tested on Ubuntu/Linux and Windows
 
@@ -98,6 +98,19 @@ Please notice the directory name in the archive must match.
 for current latest [nightly build](http://hxbuilds.s3-website-us-east-1.amazonaws.com/builds/haxe/index.html).
 
 In this case, the `haxe:version` value is still used, and must match the one of the directory extracted from the archive.
+
+#### Haxelib, Neko and `haxelib_bin`
+
+By default, Haxelib commands are run through the Haxe interpreter. While this makes the package 
+work without [Neko](http://nekovm.org), it will hang on most `haxelib run ...` commands.
+
+In order to use Haxelib `run` commands, you need to install Neko on your own, and then use : 
+```
+haxelib_bin run ...
+```
+This will run the standard `haxelib` neko binary.
+
+NB: If you get something like `Uncaught exception - load.c(237) : Failed to load library : std.ndll (std.ndll: cannot open shared object file: No such file or directory)`, it most certainly means your Neko install is broken...
 
 ### Known issues
 

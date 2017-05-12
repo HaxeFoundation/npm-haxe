@@ -3,6 +3,7 @@ var packageConfig = require('./lib/package-config');
 
 var haxe = require('./index').haxe;
 var haxelib = require('./index').haxelib;
+var haxelib_bin = require('./index').haxelib_bin;
 
 function readAll( ps, cb ) {
     var out = [], err = [];
@@ -39,6 +40,6 @@ haxe.exec('-version', function(err,stdout,stderr){
 });
 
 readAll( haxelib.spawn('list') , function(err,out,code){
-    assert.equal(code,0,"list packages");
+    assert.equal(code,0,"should list packages");
 });
 
