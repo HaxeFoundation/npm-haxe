@@ -59,7 +59,7 @@ function findPackageJson() {
 var haxeDir = vars.haxe.dir;
 var haxelibDir = vars.haxelib.dir;
 
-var haxeVersion = packageConfig('version');
+var haxeVersion = packageConfig('haxe');
 try {
 	var pack = findPackageJson();
 	if(pack != false) {
@@ -69,13 +69,16 @@ try {
 	console.warn('using default version');
 }
 if(haxeVersion == undefined){
-	haxeVersion = packageConfig('version');
+	haxeVersion = packageConfig('haxe');
 }
 
 var nightly = packageConfig('nightly');
 var haxelibVersion = packageConfig('haxelib_version');
 try {
-	haxelibVersion = parent().parse().config.haxelib;
+	var pack = findPackageJson();
+	if(pack != false) {
+		haxelibVersion = pack.parse().config.haxelib_version;
+	}
 } catch (error){
 	console.warn('using default haxelib version');
 }
