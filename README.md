@@ -66,26 +66,19 @@ haxe.exec( ["-version"], function(err, stdout, stderr) {
 
 See also [test.js](https://github.com/clemos/npm-haxe/blob/master/test.js)
 
-### Haxe externs
-
-This package also contains Haxe externs of itself, an can be installed via `haxelib git`.
-
-Maybe a bit too meta, though...
-
-
 ### Configuration options
 
-The following configuration options can be set in your package.json. 
-
-Please note they must be set before installing the package.
+Currently, these configuration options are only settable from [npm-haxe's package.json](https://github.com/clemos/npm-haxe/blob/master/package.json#L24) :(
 
 ```json
 "config": {
-    "haxe:version": "3.2.1",
-    "haxe:nightly": "",
-    "haxe:haxelib_version": "3.2.0-rc.1"
+    "version": "3.2.1",
+    "nightly": "",
+    "haxelib_version": "3.2.0-rc.1"
 }
 ```
+
+We're working on exposing them to [`npmrc`](https://docs.npmjs.com/files/npmrc), which might be the cleanest option.
 
 #### Version
 
