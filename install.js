@@ -16,6 +16,8 @@ var haxeDir = path.dirname( vars.haxe.path );
 
 var majorVersion = packageConfig('version');
 var nightly = packageConfig('nightly');
+var haxelibVersion = packageConfig('haxelib_version');
+var haxelibSrc = 'current/extra/haxelib_src';
 
 var platform = os.platform();
 var arch = os.arch();
@@ -30,6 +32,12 @@ clean( function(err){
 		if( err != null ) {
 			throw err;
 		}
+		downloadHaxelib(function(err){
+			if( err != null ) {
+				throw err;
+			}
+
+		});
 	});
 } );
 
@@ -52,10 +60,15 @@ function clean(cb) {
 }
 
 function downloadHaxe( cb ) {
-
 	console.log("Getting Haxe " + majorVersion + (nightly ? " (nightly=" + nightly + ")" : "") );
 	var url = haxeUrl(platform, arch, majorVersion, nightly);
 	downloadAndMoveTo( url, haxeDir, cb );
+}
+
+function downloadHaxelib( cb ) {
+	console.log("Getting Haxelib " + haxelibVersion );
+	var url = "https://github.com/HaxeFoundation/haxelib/archive/"+haxelibVersion+".tar.gz";
+	downloadAndMoveTo( url, haxelibSrc, cb );
 }
 
 function downloadAndMoveTo( url, targetDir, cb ) {

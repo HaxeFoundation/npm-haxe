@@ -22,6 +22,7 @@ function readAll( ps, cb ) {
 }
 
 readAll( haxe.spawn('-version') , function(err,out,code){
+    assert.equal(code,0,"shouldn't error");
     assert.equal( 
         err.toString().split(" ").shift().trim(), 
         packageConfig("version"),
@@ -40,6 +41,8 @@ haxe.exec('-version', function(err,stdout,stderr){
 });
 
 readAll( haxelib.spawn('list') , function(err,out,code){
+    assert.equal(code,0,"shouldn't error");
+    assert.equal(err.length,0,"shouldn't error");
     assert.equal(code,0,"should list packages");
 });
 
