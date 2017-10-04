@@ -16,7 +16,6 @@ var haxeDir = path.dirname( vars.haxe.path );
 
 var majorVersion = packageConfig('version');
 var nightly = packageConfig('nightly');
-var haxeExtractedDirectory = packageConfig('haxe_extracted_directory') || 'haxe-' + majorVersion;
 
 var platform = os.platform();
 var arch = os.arch();
@@ -56,10 +55,10 @@ function downloadHaxe( cb ) {
 
 	console.log("Getting Haxe " + majorVersion + (nightly ? " (nightly=" + nightly + ")" : "") );
 	var url = haxeUrl(platform, arch, majorVersion, nightly);
-	downloadAndMoveTo( url , haxeExtractedDirectory, haxeDir, cb );
+	downloadAndMoveTo( url, haxeDir, cb );
 }
 
-function downloadAndMoveTo( url , extractedDir, targetDir , cb ) {
+function downloadAndMoveTo( url, targetDir, cb ) {
 	
 	Download({ extract: true })
 		.get( url )
@@ -71,12 +70,22 @@ function downloadAndMoveTo( url , extractedDir, targetDir , cb ) {
 				cb(err);
 			}
 
+			var extractedDirs = fs.readdirSync(tmpDir)
+				.filter(function(sub){
+					return (sub.indexOf('haxe') === 0) && fs.statSync(path.join(tmpDir, sub)).isDirectory();
+				});
+
+			if( extractedDirs.length != 1 ) {
+				console.error("Unable to determine extracted directory between", extractedDirs);
+			}
+
+			var extractedDir = extractedDirs[0];
+
 			mv( path.join(tmpDir, extractedDir) , targetDir , {mkdirp: true} , function(err){
 				if( err ) {
 					console.error( err );
 					cb(err);
 				}
-
 				cb();
 			});
 		});
