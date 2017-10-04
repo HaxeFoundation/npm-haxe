@@ -1,5 +1,7 @@
 # npm-haxe 
 [![Build Status](https://travis-ci.org/clemos/npm-haxe.svg?branch=master)](https://travis-ci.org/clemos/npm-haxe)
+[![Build status](https://ci.appveyor.com/api/projects/status/6800m6af34iwvjsw?svg=true)](https://ci.appveyor.com/project/clemos/npm-haxe)
+
 
 Installs [Haxe](http://haxe.org) using [Node Package Manager](https://www.npmjs.com/) aka `npm` 
 
