@@ -75,7 +75,10 @@ if(haxeVersion == undefined){
 var nightly = packageConfig('nightly');
 var haxelibVersion = packageConfig('haxelib_version');
 try {
-	haxelibVersion = parent().parse().config.haxelib;
+	var pack = findPackageJson();
+	if(pack != false) {
+		haxelibVersion = pack.parse().config.haxelib_version;
+	}
 } catch (error){
 	console.warn('using default haxelib version');
 }
