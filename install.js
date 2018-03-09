@@ -1,14 +1,12 @@
 #!/usr/bin/env node
 var os = require('os');
-var Download = require('download');
 var rmrf = require('rimraf');
 var fs = require('fs');
 var path = require('path');
-var downloadStatus = require('download-status');
 var packageConfig = require('./lib/package-config');
 var haxeUrl = require('./lib/haxe-url');
 var vars = require('./lib/vars');
-
+var Cache = require('./lib/cache');
 
 
 function findPackageJson() {
@@ -60,6 +58,8 @@ var haxeDir = vars.haxe.dir;
 var haxelibDir = vars.haxelib.dir;
 
 var haxeVersion = packageConfig('version');
+
+var cache = new Cache();
 try {
 	var pack = findPackageJson();
 	if(pack != false) {
@@ -101,27 +101,15 @@ function clean(cb) {
 function downloadHaxe( cb ) {
 	console.log("Getting Haxe " + haxeVersion + (nightly ? " (nightly=" + nightly + ")" : "") );
 	var url = haxeUrl(platform, arch, haxeVersion, nightly);
-	downloadAndMoveTo( url , haxeDir, cb );
+	cache.download( url , haxeDir, cb );
 }
 
 function downloadHaxelib( cb ) {
 	console.log("Getting Haxelib " + haxelibVersion );
-	var url = "https://github.com/HaxeFoundation/haxelib/archive/" + haxelibVersion + ".tar.gz";
-	downloadAndMoveTo( url , haxelibDir, cb );
-}
+	var filename = haxelibVersion + ".tar.gz";
+	var url = "https://github.com/HaxeFoundation/haxelib/archive/" + filename;
+    cache.download(url , haxelibDir, cb);
 
-function downloadAndMoveTo( url, targetDir, cb ) {
-	Download({ extract: true, strip: 1 })
-		.get( url )
-		.dest( targetDir )
-		.use(downloadStatus())
-		.run( function(err,files){
-			if( err ) {
-				console.error("Unable to download or extract " + url);
-				cb(err);
-			}
-			cb();
-		});
 }
 
 clean( function(err){
