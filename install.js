@@ -7,6 +7,11 @@ var packageConfig = require('./lib/package-config');
 var haxeUrl = require('./lib/haxe-url');
 var vars = require('./lib/vars');
 var Cache = require('./lib/cache');
+var TaskRunner = require('./lib/task-runner').TaskRunner;
+var ClearTask = require('./lib/clear-task').ClearTask;
+var DownloadHaxeTask = require('./lib/download-haxe-task').DownloadHaxeTask;
+var DownloadHaxelibTask = require('./lib/download-haxelib-task').DownloadHaxelibTask;
+var DownloadNekoTask = require('./lib/download-neko-task').DownloadNekoTask;
 
 
 function findPackageJson() {
@@ -62,73 +67,16 @@ function getVersion(module){
         console.warn('using default '+ module +' version');
     }
     if(version == undefined){
-        version = packageConfig(module);
+        version = process.env[ 'npm_package_haxeDependencies_' + module ];
     }
     return version;
 }
 
-var haxeDir = vars.haxe.dir;
-var haxelibDir = vars.haxelib.dir;
-var nekoDir = vars.neko.dir;
+var runner = new TaskRunner();
 
-var haxeVersion = getVersion('haxe');
-var haxelibVersion = packageConfig('haxelib');
-var nekoVersion = packageConfig('neko');
+runner.addTask(new ClearTask());
+runner.addTask(new DownloadHaxeTask(getVersion('haxe')));
+runner.addTask(new DownloadHaxelibTask(getVersion('haxelib')));
+runner.addTask(new DownloadNekoTask(getVersion('neko')));
 
-var cache = new Cache();
-console.log(haxeVersion);
-
-
-var platform = os.platform();
-var arch = os.arch();
-
-var isWin = platform.indexOf('win') == 0;
-
-function clean(cb) {
-    try{
-        fsx.removeSync(haxeDir);
-        fsx.removeSync(haxelibDir);
-        fsx.removeSync(nekoDir);
-    } catch(error){
-        console.error(error);
-    }
-}
-
-function downloadHaxe( cb ) {
-	console.log("Getting Haxe " + haxeVersion );
-	var url = haxeUrl(platform, arch, haxeVersion, false);
-	cache.download( url , haxeDir, cb );
-}
-
-function downloadHaxelib( cb ) {
-	console.log("Getting Haxelib " + haxelibVersion );
-	var filename = haxelibVersion + ".tar.gz";
-	var url = "https://github.com/HaxeFoundation/haxelib/archive/" + filename;
-    cache.download(url , haxelibDir, cb);
-}
-
-function downloadNeko( cb ) {
-	console.log("Getting NekoVM " + nekoVersion );
-	var filename = 'v' + nekoVersion.split('.').join('-') + ".tar.gz";
-	var url = "https://github.com/HaxeFoundation/neko/archive/" + filename;
-    cache.download(url , nekoDir, cb);
-}
-
-clean();
-downloadHaxe(function(err){
-		if( err != null ) {
-			throw err;
-		}
-		fs.chmodSync(path.join( haxeDir, 'haxe' + (isWin ? '.exe' : '')) , '755');
-		downloadHaxelib( function(err) {
-			if( err != null ) {
-				throw err;
-			}
-			downloadNeko( function(err) {
-                if( err != null ) {
-                    throw err;
-                }
-            });
-		});
-	}
-);
+runner.run();
