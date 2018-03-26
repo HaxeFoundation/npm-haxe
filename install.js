@@ -12,6 +12,7 @@ var ClearTask = require('./lib/clear-task').ClearTask;
 var DownloadHaxeTask = require('./lib/download-haxe-task').DownloadHaxeTask;
 var DownloadHaxelibTask = require('./lib/download-haxelib-task').DownloadHaxelibTask;
 var DownloadNekoTask = require('./lib/download-neko-task').DownloadNekoTask;
+var InstallHaxelibDependenciesTask = require('./lib/install-haxelib-dependencies-task').InstallHaxelibDependenciesTask;
 
 
 function findPackageJson() {
@@ -59,10 +60,21 @@ function findPackageJson() {
 	return false;
 };
 var pack = findPackageJson();
+
+function getHaxeDependencies(){
+    var deps = [];
+    try {
+        deps = pack.parse().haxeDependencies;
+    } catch (error){
+      console.warn('no dependencies');
+    }
+    return deps;
+}
+
 function getVersion(module){
     var version = packageConfig(module);
     try {
-        version = pack.parse().haxeDependencies[module];
+        version = getHaxeDependencies()[module];
     } catch (error){
         console.warn('using default '+ module +' version');
     }
@@ -75,8 +87,9 @@ function getVersion(module){
 var runner = new TaskRunner();
 
 runner.addTask(new ClearTask());
-runner.addTask(new DownloadHaxeTask(getVersion('haxe')));
+/*runner.addTask(new DownloadHaxeTask(getVersion('haxe')));
 runner.addTask(new DownloadHaxelibTask(getVersion('haxelib')));
-runner.addTask(new DownloadNekoTask(getVersion('neko')));
+runner.addTask(new DownloadNekoTask(getVersion('neko')));*/
+runner.addTask(new InstallHaxelibDependenciesTask(getHaxeDependencies()));
 
 runner.run();
