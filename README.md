@@ -27,7 +27,7 @@ This will also make the haxelib repo global.
 
 ### Package.json sample
 
-```json
+```js
 {
   "scripts":{
     "postinstall": "haxelib --always install build.hxml",
