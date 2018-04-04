@@ -87,9 +87,9 @@ function getVersion(module){
 var runner = new TaskRunner();
 
 runner.addTask(new ClearTask());
-/*runner.addTask(new DownloadHaxeTask(getVersion('haxe')));
+runner.addTask(new DownloadHaxeTask(getVersion('haxe')));
 runner.addTask(new DownloadHaxelibTask(getVersion('haxelib')));
-runner.addTask(new DownloadNekoTask(getVersion('neko')));*/
+runner.addTask(new DownloadNekoTask(getVersion('neko')));
 runner.addTask(new InstallHaxelibDependenciesTask(getHaxeDependencies()));
 
 runner.run();
