@@ -9,7 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "haxe": "file:haxe-4.1.7.tgz"
+    "haxe": "file:haxe-4.1.9.tgz"
   },
   "haxeDependencies": {
     "haxe": "3.4.7",

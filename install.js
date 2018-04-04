@@ -6,6 +6,7 @@ var path = require('path');
 var packageConfig = require('./lib/package-config');
 var haxeUrl = require('./lib/haxe-url');
 var vars = require('./lib/vars');
+var localConfig = require('./package.json');
 var Cache = require('./lib/cache');
 var TaskRunner = require('./lib/task-runner').TaskRunner;
 var ClearTask = require('./lib/clear-task').ClearTask;
@@ -79,7 +80,7 @@ function getVersion(module){
         console.warn('using default '+ module +' version');
     }
     if(version == undefined){
-        version = process.env[ 'npm_package_haxeDependencies_' + module ];
+        version = localConfig.haxeDependencies[module];
     }
     return version;
 }

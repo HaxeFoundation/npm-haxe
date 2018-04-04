@@ -1,6 +1,6 @@
 {
   "name": "haxe",
-  "version": "4.1.7",
+  "version": "4.1.9",
   "homepage": "http://haxe.org/",
   "description": "Wrapper of Haxe, an open source toolkit based on a modern, high level, strictly typed programming language, a cross-compiler, a complete cross-platform standard library and ways to access each platform's native capabilities.",
   "keywords": [
@@ -38,7 +38,11 @@
   ],
   "dependencies": {
     "download": "^6.2.5",
-    "download-status": "^2.2.1",
     "fs-extra": "^5.0.0"
+  },
+  "haxeDependencies": {
+    "haxe": "3.4.7",
+    "haxelib": "3.3.0",
+    "neko": "2.2.0"
   }
 }
