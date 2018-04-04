@@ -1,6 +1,6 @@
 {
   "name": "haxe",
-  "version": "4.1.6",
+  "version": "4.1.7",
   "homepage": "http://haxe.org/",
   "description": "Wrapper of Haxe, an open source toolkit based on a modern, high level, strictly typed programming language, a cross-compiler, a complete cross-platform standard library and ways to access each platform's native capabilities.",
   "keywords": [
