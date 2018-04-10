@@ -1,14 +1,18 @@
-# npm-haxe 
+# npm-haxe v5
 [![TravisCI Build Status](https://travis-ci.org/HaxeFoundation/npm-haxe.svg?branch=master)](https://travis-ci.org/HaxeFoundation/npm-haxe)
 [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/HaxeFoundation/npm-haxe?branch=master&svg=true)](https://ci.appveyor.com/project/HaxeFoundation/npm-haxe)
 [![dependencies Status](https://david-dm.org/HaxeFoundation/npm-haxe/status.svg)](https://david-dm.org/HaxeFoundation/npm-haxe)
 
 Installs [Haxe](http://haxe.org) using [Node Package Manager](https://www.npmjs.com/) aka `npm` 
 
+**WARNING : The version contains breaking changes from npm-haxe v4**
+
 ## Key-features
 
 * Global or per-project, sandboxed, standard Haxe installation
-* Includes [Haxelib](http://lib.haxe.org/) and [Neko](https://nekovm.org/)
+* Includes [Haxelib](http://lib.haxe.org/)
+* Includes [Neko](https://nekovm.org)
+* Support both Haxelib and NPM dependencies 
 * Tested on Ubuntu/Linux and Windows
 
 ## Usage
@@ -34,7 +38,7 @@ This will also make the haxelib repo global.
     "build": "haxe build.hxml"
   },
   "dependencies": {
-    "haxe": "4.1.4" // the npm haxe module
+    "haxe": "5.0.0" // the npm haxe module
   },
  "haxeDependencies": {
    "haxe": "3.4.7", // haxe version
