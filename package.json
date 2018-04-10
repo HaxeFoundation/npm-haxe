@@ -1,6 +1,6 @@
 {
   "name": "haxe",
-  "version": "4.1.0",
+  "version": "5.0.0",
   "homepage": "http://haxe.org/",
   "description": "Wrapper of Haxe, an open source toolkit based on a modern, high level, strictly typed programming language, a cross-compiler, a complete cross-platform standard library and ways to access each platform's native capabilities.",
   "keywords": [
@@ -11,7 +11,7 @@
   ],
   "scripts": {
     "install": "node install.js",
-    "test": "node test.js"
+    "test": "cd test && npm pack .. && npm install -g haxe-5.0.0.tgz && npm install && node test.js"
   },
   "repository": {
     "type": "git",
@@ -24,6 +24,7 @@
     "bin": "./bin"
   },
   "author": "clemos",
+  "contributors": ["damoebius"],
   "license": "MIT",
   "os": [
     "win32",
@@ -36,13 +37,13 @@
     "ia32"
   ],
   "dependencies": {
-    "download": "^4.2.1",
+    "download": "^6.2.5",
     "download-status": "^2.2.1",
-    "rimraf": "^2.5.2"
+    "fs-extra": "^5.0.0"
   },
-  "config": {
-    "version": "3.2.1",
-    "nightly": "",
-    "haxelib_version": "3.2.0-rc.1"
+  "haxeDependencies": {
+    "haxe": "3.4.7",
+    "haxelib": "3.3.0",
+    "neko": "2.2.0"
   }
 }

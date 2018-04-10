@@ -1,15 +1,18 @@
-# npm-haxe 
+# npm-haxe v5
 [![TravisCI Build Status](https://travis-ci.org/HaxeFoundation/npm-haxe.svg?branch=master)](https://travis-ci.org/HaxeFoundation/npm-haxe)
 [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/HaxeFoundation/npm-haxe?branch=master&svg=true)](https://ci.appveyor.com/project/HaxeFoundation/npm-haxe)
 [![dependencies Status](https://david-dm.org/HaxeFoundation/npm-haxe/status.svg)](https://david-dm.org/HaxeFoundation/npm-haxe)
 
 Installs [Haxe](http://haxe.org) using [Node Package Manager](https://www.npmjs.com/) aka `npm` 
 
+**WARNING : The version contains breaking changes from npm-haxe v4**
+
 ## Key-features
 
 * Global or per-project, sandboxed, standard Haxe installation
-* No dependency to Neko/libneko (except for `haxelib run ...`)
 * Includes [Haxelib](http://lib.haxe.org/)
+* Includes [Neko](https://nekovm.org)
+* Support both Haxelib and NPM dependencies 
 * Tested on Ubuntu/Linux and Windows
 
 ## Usage
@@ -28,15 +31,22 @@ This will also make the haxelib repo global.
 
 ### Package.json sample
 
-```json
+```js
 {
   "scripts":{
     "postinstall": "haxelib --always install build.hxml",
     "build": "haxe build.hxml"
   },
   "dependencies": {
-    "haxe": "4.0.2"
-  }
+    "haxe": "5.0.0" // the npm haxe module
+  },
+ "haxeDependencies": {
+   "haxe": "3.4.7", // haxe version
+   "haxelib": "3.3.0", // haxelib version
+   "neko": "2.2.0", // neko version
+   "pixijs": "4.5.5", // additionnal haxelib dependency
+   "perfjs": "1.1.18"
+ }
 }
 ```
 
@@ -69,10 +79,13 @@ The following configuration options can be set in your package.json.
 Please note they must be set before installing the package.
 
 ```json
-"config": {
-    "haxe": "3.2.1",
-    "haxelib_version": "3.2.0-rc.1"
-}
+"haxeDependencies": {
+   "haxe": "3.4.7",
+   "haxelib": "3.3.0",
+   "neko": "2.2.0",
+   "pixijs": "4.5.5",
+   "perfjs": "1.1.18"
+ }
 ```
 
 #### Version
@@ -80,16 +93,11 @@ Please note they must be set before installing the package.
 See [Haxe Download list](http://haxe.org/download/list/).
 Please notice the directory name in the archive must match.
 
-#### Nightlies
-
-`haxe:nightly` value can be, for example `"2016-02-25_development_7c4fd45"`, 
-for current latest [nightly build](http://hxbuilds.s3-website-us-east-1.amazonaws.com/builds/haxe/index.html).
-
-In this case, the `haxe:version` value is still used, and must match the one of the directory extracted from the archive.
+In this case, the `haxeDependencies.haxe` value is still used, and must match the one of the directory extracted from the archive.
 
 #### Haxelib
 
-`haxe:haxelib_version` must match a release from the [official Haxelib repo](https://github.com/HaxeFoundation/haxelib/releases)
+`haxeDependencies.haxelib` must match a release from the [official Haxelib repo](https://github.com/HaxeFoundation/haxelib/releases)
 
 ### Known issues
 

@@ -1,14 +1,19 @@
 #!/usr/bin/env node
 var os = require('os');
-var Download = require('download');
-var rmrf = require('rimraf');
+var fsx = require('fs-extra');
 var fs = require('fs');
 var path = require('path');
-var downloadStatus = require('download-status');
 var packageConfig = require('./lib/package-config');
 var haxeUrl = require('./lib/haxe-url');
 var vars = require('./lib/vars');
-
+var localConfig = require('./package.json');
+var Cache = require('./lib/cache');
+var TaskRunner = require('./lib/task-runner').TaskRunner;
+var ClearTask = require('./lib/clear-task').ClearTask;
+var DownloadHaxeTask = require('./lib/download-haxe-task').DownloadHaxeTask;
+var DownloadHaxelibTask = require('./lib/download-haxelib-task').DownloadHaxelibTask;
+var DownloadNekoTask = require('./lib/download-neko-task').DownloadNekoTask;
+var InstallHaxelibDependenciesTask = require('./lib/install-haxelib-dependencies-task').InstallHaxelibDependenciesTask;
 
 
 function findPackageJson() {
@@ -55,89 +60,37 @@ function findPackageJson() {
 
 	return false;
 };
+var pack = findPackageJson();
 
-var haxeDir = vars.haxe.dir;
-var haxelibDir = vars.haxelib.dir;
-
-var haxeVersion = packageConfig('version');
-try {
-	var pack = findPackageJson();
-	if(pack != false) {
-		haxeVersion = pack.parse().config.haxe;
-	}
-} catch (error){
-	console.warn('using default version');
-}
-if(haxeVersion == undefined){
-	haxeVersion = packageConfig('version');
+function getHaxeDependencies(){
+    var deps = [];
+    try {
+        deps = pack.parse().haxeDependencies;
+    } catch (error){
+      console.warn('no dependencies');
+    }
+    return deps;
 }
 
-var nightly = packageConfig('nightly');
-var haxelibVersion = packageConfig('haxelib_version');
-try {
-	haxelibVersion = parent().parse().config.haxelib;
-} catch (error){
-	console.warn('using default haxelib version');
-}
-if(haxelibVersion == undefined){
-	haxelibVersion = packageConfig('haxelib_version');
-}
-
-var platform = os.platform();
-var arch = os.arch();
-
-var isWin = platform.indexOf('win') == 0;
-
-function clean(cb) {
-	rmrf(haxeDir,function(err){
-		if( err != null ) {
-			cb( err );
-		} else {
-			rmrf(haxelibDir, cb);
-		}
-	} );
+function getVersion(module){
+    var version = packageConfig(module);
+    try {
+        version = getHaxeDependencies()[module];
+    } catch (error){
+        console.warn('using default '+ module +' version');
+    }
+    if(version == undefined){
+        version = localConfig.haxeDependencies[module];
+    }
+    return version;
 }
 
-function downloadHaxe( cb ) {
-	console.log("Getting Haxe " + haxeVersion + (nightly ? " (nightly=" + nightly + ")" : "") );
-	var url = haxeUrl(platform, arch, haxeVersion, nightly);
-	downloadAndMoveTo( url , haxeDir, cb );
-}
+var runner = new TaskRunner();
 
-function downloadHaxelib( cb ) {
-	console.log("Getting Haxelib " + haxelibVersion );
-	var url = "https://github.com/HaxeFoundation/haxelib/archive/" + haxelibVersion + ".tar.gz";
-	downloadAndMoveTo( url , haxelibDir, cb );
-}
+runner.addTask(new ClearTask());
+runner.addTask(new DownloadHaxeTask(getVersion('haxe')));
+runner.addTask(new DownloadHaxelibTask(getVersion('haxelib')));
+runner.addTask(new DownloadNekoTask(getVersion('neko')));
+runner.addTask(new InstallHaxelibDependenciesTask(getHaxeDependencies()));
 
-function downloadAndMoveTo( url, targetDir, cb ) {
-	Download({ extract: true, strip: 1 })
-		.get( url )
-		.dest( targetDir )
-		.use(downloadStatus())
-		.run( function(err,files){
-			if( err ) {
-				console.error("Unable to download or extract " + url);
-				cb(err);
-			}
-			cb();
-		});
-}
-
-clean( function(err){
-	if( err != null ) {
-		throw err;
-	}
-	downloadHaxe(function(err){
-		if( err != null ) {
-			throw err;
-		}
-
-		fs.chmodSync(path.join( haxeDir, 'haxe' + (isWin ? '.exe' : '')) , '755');
-		downloadHaxelib( function(err) {
-			if( err != null ) {
-				throw err;
-			}
-		});
-	});
-} );
+runner.run();
