@@ -11,7 +11,7 @@
   ],
   "scripts": {
     "install": "node install.js",
-    "test": "cd test && npm pack .. && npm install -g haxe-5.0.0.tgz && npm install && node test.js"
+    "test": "cd test && npm pack .. && npm install -g haxe-5.0.1.tgz && npm install && node test.js"
   },
   "repository": {
     "type": "git",
