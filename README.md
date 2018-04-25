@@ -38,7 +38,7 @@ This will also make the haxelib repo global.
     "build": "haxe build.hxml"
   },
   "dependencies": {
-    "haxe": "5.0.0" // the npm haxe module
+    "haxe": "^5.0.0" // the npm haxe module
   },
  "haxeDependencies": {
    "haxe": "3.4.7", // haxe version
