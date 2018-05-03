@@ -1,2 +1,2 @@
 #!/usr/bin/env node
-require('..').neko.cli();
+require('haxe').neko.cli();

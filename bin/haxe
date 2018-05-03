@@ -1,2 +1,2 @@
 #!/usr/bin/env node
-require('..').haxe.cli();
+require('haxe').haxe.cli();

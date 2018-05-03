@@ -9,7 +9,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "haxe": "file:haxe-5.0.3.tgz"
+    "gulp": "^3.9.1",
+    "haxe": "file:haxe-5.0.7.tgz"
   },
   "haxeDependencies": {
     "haxe": "3.4.7",
