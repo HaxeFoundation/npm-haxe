@@ -1,6 +1,6 @@
 {
   "name": "haxe",
-  "version": "5.0.2",
+  "version": "5.0.3",
   "homepage": "http://haxe.org/",
   "description": "Wrapper of Haxe, an open source toolkit based on a modern, high level, strictly typed programming language, a cross-compiler, a complete cross-platform standard library and ways to access each platform's native capabilities.",
   "keywords": [
@@ -11,7 +11,7 @@
   ],
   "scripts": {
     "install": "node install.js",
-    "test": "cd test && npm pack .. && npm install -g haxe-5.0.2.tgz && npm install && node test.js"
+    "test": "cd test && npm pack .. && npm install -g haxe-5.0.3.tgz && npm install && node test.js"
   },
   "repository": {
     "type": "git",
