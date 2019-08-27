@@ -10,8 +10,6 @@ var neko = require('haxe').neko;
 assert.ok(fsx.pathExistsSync("node_modules/haxe/downloads/haxe/std/Any.hx"))
 assert.ok(fsx.pathExistsSync("node_modules/haxe/downloads/haxelib/haxelib.json"))
 assert.ok(fsx.pathExistsSync("node_modules/haxe/downloads/neko/README.md"))
-assert.ok(fsx.pathExistsSync("node_modules/haxe/.haxelib/tamina/git/build.hxml"))
-assert.ok(fsx.pathExistsSync("node_modules/haxe/.haxelib/pixijs/4,5,5/README.md"))
 
 assert.ok(haxe);
 assert.ok(haxelib);
