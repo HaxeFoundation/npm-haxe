@@ -4,19 +4,19 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "node test.js"
+    "test": "node test.js && haxe -main Main -js main.js -lib pixijs"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "gulp": "^4.0.0",
-    "haxe": "file:haxe-5.0.10.tgz"
+    "haxe": "file:haxe-5.1.1.tgz"
   },
   "haxeDependencies": {
     "haxe": "3.4.7",
     "haxelib": "3.3.0",
     "neko": "2.2.0",
     "pixijs": "4.5.5",
-    "perfjs": "1.1.8"
+    "tamina": "git+https://github.com/damoebius/taminahx.git"
   }
 }

@@ -45,7 +45,7 @@ This will also make the haxelib repo global.
    "haxelib": "3.3.0", // haxelib version
    "neko": "2.2.0", // neko version
    "pixijs": "4.5.5", // additionnal haxelib dependency
-   "perfjs": "1.1.18"
+   "tamina": "git+https://github.com/damoebius/taminahx.git" //haxelib git dependency
  }
 }
 ```
