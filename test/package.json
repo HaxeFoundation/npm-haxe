@@ -10,7 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "gulp": "^4.0.0",
-    "haxe": "file:haxe-5.1.1.tgz"
+    "haxe": "file:haxe-5.1.2.tgz"
   },
   "haxeDependencies": {
     "haxe": "3.4.7",
