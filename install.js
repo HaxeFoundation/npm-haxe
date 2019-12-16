@@ -65,7 +65,7 @@ var pack = findPackageJson();
 function getHaxeDependencies(){
     var deps;
     
-	try {
+    try {
         deps = pack.parse().haxeDependencies;
     } catch (error){
       console.warn('no dependencies');
