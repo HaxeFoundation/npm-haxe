@@ -76,7 +76,7 @@ function getHaxeDependencies(){
 
 function getVersion(module){
     var envVersion = packageConfig(module);
-	var packageVersion;
+    var packageVersion;
 
     try {
         packageVersion = getHaxeDependencies()[module];
