@@ -63,26 +63,30 @@ function findPackageJson() {
 var pack = findPackageJson();
 
 function getHaxeDependencies(){
-    var deps = [];
+    var deps;
+    
     try {
         deps = pack.parse().haxeDependencies;
     } catch (error){
       console.warn('no dependencies');
     }
+
     return deps;
 }
 
 function getVersion(module){
-    var version = packageConfig(module);
+    var envVersion = packageConfig(module);
+    var packageVersion;
+
     try {
-        version = getHaxeDependencies()[module];
+        packageVersion = getHaxeDependencies()[module];
     } catch (error){
         console.warn('using default '+ module +' version');
     }
-    if(version == undefined){
-        version = localConfig.haxeDependencies[module];
-    }
-    return version;
+
+    var localFallbackVersion = localConfig.haxeDependencies[module];
+
+    return packageVersion || envVersion || localFallbackVersion;
 }
 
 var runner = new TaskRunner();
