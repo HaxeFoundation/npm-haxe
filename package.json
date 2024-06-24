@@ -36,7 +36,8 @@
   ],
   "cpu": [
     "x64",
-    "ia32"
+    "ia32",
+    "arm64"
   ],
   "engines" : { "node" : ">=8.0.0" },
   "dependencies": {
